@@ -29,6 +29,7 @@ jobs:
           rm -rf docs
           mkdir docs
           cp -r dist/* docs/
+          touch docs/.nojekyll
 
       - name: Commit and push changes
         run: |
