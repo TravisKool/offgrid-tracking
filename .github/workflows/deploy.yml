@@ -33,6 +33,8 @@ jobs:
           mkdir docs
           cp -r dist/* docs/
           touch docs/.nojekyll
+      - name: Copy CNAME file into docs
+        run: cp CNAME docs/
 
       - name: Commit and push changes
         run: |
