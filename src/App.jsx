@@ -15,6 +15,8 @@ const trackers = [
   { name: "SportsTrackLive", url: "https://www.sportstracklive.com/en/user/offgridpilot?live=requested" },
 ];
 
+
+
 export default function App() {
   return (
     <div className="min-h-screen bg-gray-900 text-white flex-col items-center py-12 px-4">
