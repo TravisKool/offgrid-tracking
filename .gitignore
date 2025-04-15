@@ -8,7 +8,8 @@ lerna-debug.log*
 .pnpm-debug.log*
 
 # Ignore generated build output
-/docs/
+/dist/
+!/dist/.nojekyll
 /public/data/livetrack24-location-data.json
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
