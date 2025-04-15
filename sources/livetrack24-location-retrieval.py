@@ -24,8 +24,5 @@ data = {
     "source": "LiveTrack24"
 }
 
-# Ensure public/data folder exists
 Path("public/data").mkdir(parents=True, exist_ok=True)
-
-# Write the data to a JSON file in public/data
-Path("public/data/livetrack24-location-data.json").write_text(json.dumps(data, indent=2))
+Path("public/data/livetrack24-location-data.json").write_text(json.dumps(data, indent=2))
