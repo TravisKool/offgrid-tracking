@@ -19,6 +19,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/livetrack24-location-data.json
+          git add public/data/livetrack24-location-data.json
           git commit -m "Update livetrack24 location data"
           git push
