@@ -1,8 +1,7 @@
 import re
 import json
-from datetime import datetime
-from pathlib import Path
 import requests
+from pathlib import Path
 
 # Fetch the raw text from LiveTrack24
 url = "https://www.livetrack24.com/user/Offgridcoder/text"
@@ -25,4 +24,8 @@ data = {
     "source": "LiveTrack24"
 }
 
-Path("data/livetrack24-location-data.json").write_text(json.dumps(data, indent=2))
+# Ensure public/data folder exists
+Path("public/data").mkdir(parents=True, exist_ok=True)
+
+# Write the data to a JSON file in public/data
+Path("public/data/livetrack24-location-data.json").write_text(json.dumps(data, indent=2))
