@@ -1,61 +1,83 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
+import { cardStyle } from "../styles/sharedStyles";
+
+function haversineDistance(lat1, lon1, lat2, lon2) {
+  const R = 3958.8; // Earth radius in miles
+  const toRad = (deg) => (deg * Math.PI) / 180;
+  const dLat = toRad(lat2 - lat1);
+  const dLon = toRad(lon2 - lon1);
+  const a =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLon / 2) ** 2;
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
 
 export default function LiveTrackCard() {
-  const [location, setLocation] = useState(null);
-
-  const fetchLocation = () => {
-    fetch("https://www.livetrack24.com/user/Offgridcoder/text")
-      .then((res) => res.text())
-      .then((text) => {
-        const lines = text.trim().split("\n");
-        const lastLine = lines[lines.length - 1].trim();
-        const parts = lastLine.split(",");
-
-        if (parts.length >= 6) {
-          const [timestamp, lat, lon, alt, speed, course] = parts;
-
-          setLocation({
-            timestamp: timestamp.trim(),
-            lat: parseFloat(lat),
-            lon: parseFloat(lon),
-            altitude: parseFloat(alt),
-            speed: parseFloat(speed),
-            course: parseFloat(course),
-          });
-        } else {
-          console.warn("Unexpected format from LiveTrack24:", lastLine);
-        }
-      })
-      .catch((err) => console.error("Failed to fetch LiveTrack24 data:", err));
-  };
+  const [data, setData] = useState(null);
+  const [distance, setDistance] = useState(null);
 
   useEffect(() => {
-    fetchLocation();
-    const interval = setInterval(fetchLocation, 10000);
-    return () => clearInterval(interval);
+    fetch("/data/livetrack24-location-data.json")
+      .then((res) => res.json())
+      .then((track) => {
+        setData(track);
+
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition((pos) => {
+            const miles = haversineDistance(
+              pos.coords.latitude,
+              pos.coords.longitude,
+              track.latitude,
+              track.longitude
+            );
+            setDistance(miles.toFixed(1));
+          });
+        }
+      })
+      .catch(console.error);
   }, []);
 
   return (
-    <section className="w-full max-w-xl mx-auto mt-6">
-      <div className="bg-gray-800 p-4 rounded-xl border border-gray-700 shadow">
-        <h2 className="text-xl font-bold mb-2">LiveTrack24 - Latest Location</h2>
-        <p className="text-sm text-gray-400 mb-2">
-          Last recorded: {location?.timestamp || "Unavailable"}
-        </p>
-        <p>Latitude: {location?.lat ?? "-"}</p>
-        <p>Longitude: {location?.lon ?? "-"}</p>
-        <p>Altitude: {location?.altitude ?? "-"} m</p>
-        <p>Speed: {location?.speed ?? "-"} km/h</p>
-        <p>Course: {location?.course != null ? location.course.toFixed(2) : "-"}°</p>
+    <div className={cardStyle}>
+      <div>
+        <h2 className="text-xl font-semibold mb-2 text-white">LiveTrack24</h2>
+        {data ? (
+          <div className="text-sm text-white space-y-1">
+            <p><strong>Location:</strong> {data.location}</p>
+            <p><strong>Lat:</strong> {data.latitude}</p>
+            <p><strong>Lon:</strong> {data.longitude}</p>
+            <p><strong>Alt:</strong> {data.altitude_m} m</p>
+            <p><strong>Speed:</strong> {data.speed_kmh} km/h</p>
+            <p><strong>Time:</strong> {new Date(data.timestamp).toLocaleString()}</p>
+            {distance && (
+              <p><strong>Distance:</strong> {distance} miles from here</p>
+            )}
+          </div>
+        ) : (
+          <p className="text-gray-400">Loading latest data...</p>
+        )}
+      </div>
+
+      <div className="mt-4 space-y-1">
         <a
-          href="https://www.livetrack24.com/user/Offgridcoder"
+          href="https://www.livetrack24.com/user/Offgridcoder/text"
           target="_blank"
           rel="noopener noreferrer"
-          className="block text-blue-400 underline text-sm mt-2"
+          className="text-xs text-blue-400 hover:underline block"
         >
-          View full LiveTrack24 page
+          View on LiveTrack24
         </a>
+        {data && (
+          <a
+            href={`https://www.google.com/maps/dir/?api=1&destination=${data.latitude},${data.longitude}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs text-green-400 hover:underline block"
+          >
+            Get Directions (Google Maps)
+          </a>
+        )}
       </div>
-    </section>
+    </div>
   );
 }
