@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { cardStyle } from "../styles/sharedStyles";
+import { cardStyle } from "../styles/sharedStyles.js";
 
 function haversineDistance(lat1, lon1, lat2, lon2) {
   const R = 3958.8;

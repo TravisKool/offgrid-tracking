@@ -1,6 +1,6 @@
 import React from "react";
-import LiveTrackCard from "./components/LiveTrackCard";
-import { cardStyle } from "./styles/sharedStyles";
+import LiveTrackCard from "./components/LiveTrackCard.jsx";
+import { cardStyle } from "./styles/sharedStyles.js";
 
 const trackers = [
   { name: "Garmin - InReach Mini 2", url: "https://share.garmin.com/traviskool" },
