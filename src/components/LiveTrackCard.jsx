@@ -41,21 +41,29 @@ export default function LiveTrackCard() {
     <div className={cardStyle}>
       <div>
         <h2 className="text-xl font-semibold mb-2 text-white">LiveTrack24</h2>
-        {data && data.latitude ? (
-          <div className="text-sm text-white space-y-1">
-            <p><strong>Location:</strong> {data.location}</p>
-            <p><strong>Lat:</strong> {data.latitude}</p>
-            <p><strong>Lon:</strong> {data.longitude}</p>
-            <p><strong>Alt:</strong> {data.altitude_m} m</p>
-            <p><strong>Speed:</strong> {data.speed_kmh} km/h</p>
-            <p><strong>Time:</strong> {new Date(data.timestamp).toLocaleString()}</p>
-            {distance && (
-              <p><strong>Distance:</strong> {distance} miles from here</p>
-            )}
-          </div>
+
+
+        {data ? (
+          data.latitude ? (
+            <div className="text-sm text-white space-y-1">
+              <p><strong>Last Known Position:</strong> {data.location}</p>
+              <p><strong>Lat:</strong> {data.latitude}</p>
+              <p><strong>Lon:</strong> {data.longitude}</p>
+              <p><strong>Alt:</strong> {data.altitude_m} m</p>
+              <p><strong>Speed:</strong> {data.speed_kmh} km/h</p>
+              <p><strong>Time:</strong> {new Date(data.timestamp).toLocaleString()}</p>
+              {distance && (
+                <p><strong>Distance:</strong> {distance} miles from here</p>
+              )}
+            </div>
+          ) : (
+            <p className="text-gray-400">Location unavailable</p>
+          )
         ) : (
-          <p className="text-gray-400">Location unavailable</p>
+          <p className="text-gray-400">Loading...</p>
         )}
+
+
       </div>
       <div className="mt-4 space-y-1">
         <a
