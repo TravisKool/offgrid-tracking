@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { cardStyle } from "../styles/sharedStyles";
 
 function haversineDistance(lat1, lon1, lat2, lon2) {
-  const R = 3958.8; // Earth radius in miles
+  const R = 3958.8;
   const toRad = (deg) => (deg * Math.PI) / 180;
   const dLat = toRad(lat2 - lat1);
   const dLon = toRad(lon2 - lon1);
@@ -17,12 +17,12 @@ export default function LiveTrackCard() {
   const [distance, setDistance] = useState(null);
 
   useEffect(() => {
-    fetch("/data/livetrack24-location-data.json")
+    fetch(`/data/livetrack24-location-data.json?ts=${Date.now()}`)
       .then((res) => res.json())
       .then((track) => {
         setData(track);
 
-        if (navigator.geolocation) {
+        if (track?.latitude && navigator.geolocation) {
           navigator.geolocation.getCurrentPosition((pos) => {
             const miles = haversineDistance(
               pos.coords.latitude,
@@ -41,7 +41,7 @@ export default function LiveTrackCard() {
     <div className={cardStyle}>
       <div>
         <h2 className="text-xl font-semibold mb-2 text-white">LiveTrack24</h2>
-        {data ? (
+        {data && data.latitude ? (
           <div className="text-sm text-white space-y-1">
             <p><strong>Location:</strong> {data.location}</p>
             <p><strong>Lat:</strong> {data.latitude}</p>
@@ -54,10 +54,9 @@ export default function LiveTrackCard() {
             )}
           </div>
         ) : (
-          <p className="text-gray-400">Loading latest data...</p>
+          <p className="text-gray-400">Location unavailable</p>
         )}
       </div>
-
       <div className="mt-4 space-y-1">
         <a
           href="https://www.livetrack24.com/user/Offgridcoder/text"
@@ -67,7 +66,7 @@ export default function LiveTrackCard() {
         >
           View on LiveTrack24
         </a>
-        {data && (
+        {data && data.latitude && (
           <a
             href={`https://www.google.com/maps/dir/?api=1&destination=${data.latitude},${data.longitude}`}
             target="_blank"
