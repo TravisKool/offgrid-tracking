@@ -1,4 +1,5 @@
-name: Build and Deploy to docs/
+# .github/workflows/deploy.yml
+name: Deploy to GitHub Pages
 
 on:
   push:
@@ -9,14 +10,14 @@ permissions:
   contents: write
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Setup Node
+      - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 18
@@ -24,24 +25,11 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build the project
+      - name: Build project
         run: npm run build
 
-      - name: Move build output to docs folder
-        run: |
-          rm -rf docs
-          mkdir docs
-          cp -r dist/* docs/
-          touch docs/.nojekyll
-      - name: Copy CNAME file into docs
-        run: cp CNAME docs/
-
-      - name: Commit and push changes
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add .
-          git diff --cached --quiet || git commit -m "Deploy updated site"
-          git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
