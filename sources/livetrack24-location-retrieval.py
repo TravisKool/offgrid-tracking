@@ -25,4 +25,4 @@ data = {
 }
 
 Path("public/data").mkdir(parents=True, exist_ok=True)
-Path("public/data/livetrack24-location-data.json").write_text(json.dumps(data, indent=2))
+Path("public/data/livetrack24-location-data.json").write_text(json.dumps(data,indent=2))
