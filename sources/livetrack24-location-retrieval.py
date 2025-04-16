@@ -1,6 +1,7 @@
 import re
 import json
 import requests
+import os
 from pathlib import Path
 
 # Fetch raw text
@@ -26,7 +27,8 @@ if latlon:
         "source": "LiveTrack24"
     }
 
-    Path("data").mkdir(parents=True, exist_ok=True)
-    Path("data/livetrack24-location-data.json").write_text(json.dumps(data, indent=2))
+    os.makedirs("public/data/", exist_ok=True)
+    with open("public/data/livetrack24-location-data.json", "w") as f:
+            f.write(json_string)
 else:
     print("LiveTrack24: Unable to parse valid GPS data")
