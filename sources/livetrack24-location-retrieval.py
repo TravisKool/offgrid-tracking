@@ -26,7 +26,7 @@ if latlon:
         "source": "LiveTrack24"
     }
 
-    Path("public/data").mkdir(parents=True, exist_ok=True)
-    Path("public/data/livetrack24-location-data.json").write_text(json.dumps(data, indent=2))
+    Path("data").mkdir(parents=True, exist_ok=True)
+    Path("data/livetrack24-location-data.json").write_text(json.dumps(data, indent=2))
 else:
     print("LiveTrack24: Unable to parse valid GPS data")
