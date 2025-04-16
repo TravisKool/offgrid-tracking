@@ -17,7 +17,7 @@ export default function LiveTrackCard() {
   const [distance, setDistance] = useState(null);
 
   useEffect(() => {
-    fetch(`/public/data/livetrack24-location-data.json?ts=${Date.now()}`)
+    fetch(`/data/livetrack24-location-data.json?ts=${Date.now()}`)
       .then((res) => res.json())
       .then((track) => {
         setData(track);
