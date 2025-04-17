@@ -2,9 +2,11 @@ name: livetrack24-location-retrieval
 
 on:
   schedule:
-    - cron: "*/1 * * * *"
+    - cron: "*/4 * * * *"
   workflow_dispatch:
-
+  push:
+    branches:
+      - main
 permissions:
   contents: write
 
