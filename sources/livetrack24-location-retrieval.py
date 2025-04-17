@@ -1,12 +1,14 @@
-from bs4 import BeautifulSoup
-from pathlib import Path
 import re
 import json
+import requests
+from bs4 import BeautifulSoup
+from pathlib import Path
 from datetime import datetime, timedelta
 
-# Load HTML
-html_path = Path("lt24htmlraw.html")
-html = html_path.read_text(encoding="iso-8859-1")
+# Load HTML from LiveTrack24
+url = "https://www.livetrack24.com/user/Offgridcoder/text"
+response = requests.get(url, headers={"Cache-Control": "no-cache"})
+html = response.text
 soup = BeautifulSoup(html, "html.parser")
 
 def extract_text_after(label):
