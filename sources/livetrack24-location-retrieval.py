@@ -14,7 +14,7 @@ latlon = re.search(r"Lat/Long:\s*([\d.-]+)\s*/\s*([\d.-]+)", raw_text)
 alt_speed = re.search(r"Height / Speed:\s*(\d+)\s*m\s*/\s*(\d+)", raw_text)
 location = re.search(r"Location:\s*(.*?)\s*<", raw_text)
 timestamp = re.search(r"Time:\s*(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})", raw_text)
-
+print(raw_text)
 # Only write if lat/lon are found
 if latlon:
     data = {
