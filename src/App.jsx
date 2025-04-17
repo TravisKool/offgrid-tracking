@@ -18,26 +18,31 @@ const trackers = [
 
 export default function App() {
   return (
-    <main className="min-h-screen bg-gray-900 text-white flex flex-col items-center py-12 px-4 space-y-8">
-      <h1 className="text-3xl font-bold mb-8">Offgrid Tracking Links</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-6xl">
-      
-        <LiveTrackCard />
-        <SkyLinesCard />
-        
-        {trackers.map((tracker, index) => (
-          <a
-            key={index}
-            href={tracker.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={cardStyle}
-          >
-            <h2 className="text-xl font-semibold">{tracker.name}</h2>
-            <p className="text-sm mt-1 text-gray-400 break-all">{tracker.url}</p>
-          </a>
-        ))}
-      </div>
-    </main>
+    <div className="flex flex-col min-h-screen bg-gray-900 text-white">
+      <main className="flex-grow text-white px-4 py-4 space-y-8 flex flex-col items-center">
+        <div className="text-3xl font-bold mb-8">Track Travis</div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-6xl">
+
+          <LiveTrackCard />
+          <SkyLinesCard />
+
+          {trackers.map((tracker, index) => (
+            <a
+              key={index}
+              href={tracker.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={cardStyle}
+            >
+              <h2 className="text-xl font-semibold">{tracker.name}</h2>
+              <p className="text-sm mt-1 text-gray-400 break-all">{tracker.url}</p>
+            </a>
+          ))}
+        </div>
+      </main>
+      <footer className="text-center text-sm text-gray-400 py-4">
+        © {new Date().getFullYear()} Travis Kool. All rights reserved.
+      </footer>
+    </div>
   );
 }
