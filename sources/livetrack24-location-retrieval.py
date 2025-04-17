@@ -6,7 +6,7 @@ from pathlib import Path
 
 # Fetch raw text
 url = "https://www.livetrack24.com/user/Offgridcoder/text"
-response = requests.get(url)
+response = requests.get(url, headers={'Cache-Control': 'no-cache'})
 raw_text = response.text
 
 # Improved pattern matching
