@@ -17,6 +17,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Install Dependencies
+        runs: |
+          python -m pip install --upgrade pip
+          pip install beautifulsoup4
+
       - name: Run livetrack24 retrieval script
         run: python sources/livetrack24-location-retrieval.py
 
