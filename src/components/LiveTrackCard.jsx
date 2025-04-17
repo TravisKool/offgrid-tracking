@@ -17,18 +17,18 @@ export default function LiveTrackCard() {
   const [distance, setDistance] = useState(null);
 
   useEffect(() => {
-    fetch(`/data/livetrack24-location-data.json?ts=${Date.now()}`)
+    fetch("/data/livetrack24-location-data.json?ts=" + Date.now())
       .then((res) => res.json())
       .then((track) => {
         setData(track);
-
-        if (track?.latitude && navigator.geolocation) {
+        if (track?.coordinates && navigator.geolocation) {
+          const [lat, lon] = track.coordinates.split(",").map(Number);
           navigator.geolocation.getCurrentPosition((pos) => {
             const miles = haversineDistance(
               pos.coords.latitude,
               pos.coords.longitude,
-              track.latitude,
-              track.longitude
+              lat,
+              lon
             );
             setDistance(miles.toFixed(1));
           });
@@ -39,32 +39,44 @@ export default function LiveTrackCard() {
 
   return (
     <div className={cardStyle}>
-      <div>
-        <h2 className="text-xl font-semibold mb-2 text-white">LiveTrack24</h2>
+      <h2 className="text-xl font-semibold mb-2 text-white">LiveTrack24</h2>
+
+      {data ? (
+        data.coordinates ? (
+          <div className="text-sm text-white space-y-1">
 
 
-        {data ? (
-          data.latitude ? (
-            <div className="text-sm text-white space-y-1">
-              <p><strong>Last Known Position:</strong> {data.location}</p>
-              <p><strong>Lat:</strong> {data.latitude}</p>
-              <p><strong>Lon:</strong> {data.longitude}</p>
-              <p><strong>Alt:</strong> {data.altitude_m} m</p>
-              <p><strong>Speed:</strong> {data.speed_kmh} km/h</p>
-              <p><strong>Time:</strong> {new Date(data.timestamp).toLocaleString()}</p>
-              {distance && (
-                <p><strong>Distance:</strong> {distance} miles from here</p>
-              )}
+            <div className="flex items-center space-x-2 mb-2">
+              <div
+                className={`w-3 h-3 rounded-full ${data.isLive ? "bg-green-400 animate-pulse" : "bg-red-500 opacity-60"
+                  }`}
+                title={data.isLive ? "Live" : "Offline"}
+              />
+              <span
+                className={`font-semibold text-sm ${data.isLive ? "text-green-300" : "text-red-400"
+                  }`}
+              >
+                {data.isLive ? "Live" : "Offline"}
+              </span>
             </div>
-          ) : (
-            <p className="text-gray-400">Location unavailable</p>
-          )
+
+            <p><strong>Launch:</strong> {data.launchLocation}</p>
+            <p><strong>Launch Time (UTC):</strong> {data.launchTimeUtc}</p>
+            <p><strong>Land Time (UTC):</strong> {data.landTimeUtc}</p>
+            <p><strong>Flight Duration:</strong> {data.flightDurationTimeSpan}</p>
+            <p><strong>Distance from Takeoff:</strong> {data.flightDistanceFromTakeoffInMiles} miles</p>
+            <p><strong>Data Source:</strong> {data.locationDataSource}</p>
+            {distance && (
+              <p><strong>Distance from you:</strong> {distance} miles</p>
+            )}
+          </div>
         ) : (
-          <p className="text-gray-400">Loading...</p>
-        )}
+          <p className="text-gray-400">Location unavailable</p>
+        )
+      ) : (
+        <p className="text-gray-400">Loading...</p>
+      )}
 
-
-      </div>
       <div className="mt-4 space-y-1">
         <a
           href="https://www.livetrack24.com/user/Offgridcoder/text"
@@ -74,9 +86,9 @@ export default function LiveTrackCard() {
         >
           View on LiveTrack24
         </a>
-        {data && data.latitude && (
+        {data?.coordinates && (
           <a
-            href={`https://www.google.com/maps/dir/?api=1&destination=${data.latitude},${data.longitude}`}
+            href={`https://www.google.com/maps/dir/?api=1&destination=\${data.coordinates}`}
             target="_blank"
             rel="noopener noreferrer"
             className="text-xs text-green-400 hover:underline block"
