@@ -22,7 +22,7 @@ jobs:
         run: ls -al public/data
 
       - name: Show file contents
-        run: cat public/data/livetrack24-locationdata.json
+        run: cat public/data/livetrack24-location-data.json
 
       - name: Commit and push updated data
         run: |
