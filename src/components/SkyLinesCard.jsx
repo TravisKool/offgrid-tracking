@@ -2,12 +2,13 @@ import { useEffect, useState } from "react";
 import { cardStyle } from "../styles/sharedStyles.js";
 import { haversineDistance } from "../utils/geoUtils.js";
 
-export default function LiveTrackCard() {
+
+export default function SkyLinesCard() {
   const [data, setData] = useState(null);
   const [distance, setDistance] = useState(null);
 
   useEffect(() => {
-    fetch("/data/livetrack24-location-data.json?ts=" + Date.now())
+    fetch("/data/skylines-location-data.json?ts=" + Date.now())
       .then((res) => res.json())
       .then((track) => {
         setData(track);
@@ -29,7 +30,7 @@ export default function LiveTrackCard() {
 
   return (
     <div className={cardStyle}>
-      <h2 className="text-xl font-semibold mb-2 text-white">LiveTrack24</h2>
+      <h2 className="text-xl font-semibold mb-2 text-white">SkyLines</h2>
 
       {data ? (
         data.coordinates ? (
@@ -69,12 +70,12 @@ export default function LiveTrackCard() {
 
       <div className="mt-4 space-y-1">
         <a
-          href="https://www.livetrack24.com/user/Offgridcoder/text"
+          href="https://skylines.aero/tracking/13962"
           target="_blank"
           rel="noopener noreferrer"
           className="text-xs text-blue-400 hover:underline block"
         >
-          View on LiveTrack24
+          View on SkyLines
         </a>
         {data?.coordinates && (
           <a

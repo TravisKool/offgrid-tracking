@@ -1,4 +1,4 @@
-name: livetrack24-location-retrieval
+name: live-location-retrievals
 
 on:
   schedule:
@@ -12,7 +12,7 @@ permissions:
   contents: write
 
 jobs:
-  update-livetrack24:
+  update-live-location-data:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
@@ -27,20 +27,23 @@ jobs:
       - name: Run livetrack24 retrieval script
         run: python sources/livetrack24-location-retrieval.py
 
+      - name: Run skylines retrieval script
+        run: python sources/skylines-location-retrieval.py
+
       - name: List public/data contents
         run: ls -al public/data
 
-      - name: Show file contents
-        run: cat public/data/livetrack24-location-data.json
+      # - name: Show file contents
+      #   run: cat public/data/livetrack24-location-data.json
 
       - name: Commit and push updated data
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git pull origin main --rebase
-          git add public/data/livetrack24-location-data.json
+          git add public/data/.
           git status
-          git diff --cached --quiet || git commit -m "Update LiveTrack24 Location"
+          git diff --cached --quiet || git commit -m "Update live tracking Locations"
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
