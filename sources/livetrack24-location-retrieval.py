@@ -45,6 +45,6 @@ output = {
 }
 
 # Save to JSON
-output_path = Path("livetrack24-location-data.json")
+output_path = Path("public/data/livetrack24-location-data.json")
 output_path.write_text(json.dumps(output, indent=2))
 print(f"Saved to {output_path.resolve()}")
