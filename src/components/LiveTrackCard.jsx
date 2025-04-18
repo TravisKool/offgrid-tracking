@@ -11,7 +11,7 @@ export default function LiveTrackCard() {
     fetch("/data/location-data.json?ts=" + Date.now())
       .then((res) => res.json())
       .then((track) => {
-        const lt24 = track?.livetrack24 || {};
+        const lt24 = track?.LiveTrack24 || {};
         setData(lt24);
         if (lt24?.coordinates && navigator.geolocation) {
           const [lat, lon] = lt24.coordinates.split(",").map(Number);
