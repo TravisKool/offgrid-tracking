@@ -1,11 +1,11 @@
 {
   "LiveTrack24": {
-    "isLive": true,
-    "lastUpdatedDateTimeUtc": "2025-04-19 11:39:52 GMT+16",
+    "isLive": false,
+    "lastUpdatedDateTimeUtc": "2025-04-18 12:00:54 GMT-7",
     "launchLocation": "South Mountain - US   14.3 km",
-    "launchTimeUtc": "T21:44:50Z",
-    "landTimeUtc": "T22:00:52Z",
-    "flightDurationTimeSpan": "00:16:02",
+    "launchTimeUtc": "T22:00:46Z",
+    "landTimeUtc": "T22:00:54Z",
+    "flightDurationTimeSpan": "00:00:08",
     "altitudeInFeet": "1197.5",
     "flightDistanceFromTakeoffInMiles": "0.0",
     "coordinates": "33.3907,-111.9248",
