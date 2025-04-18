@@ -56,29 +56,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # - name: Commit and push updated data to gh-pages
-      #   run: |
-      #     cp public/data/location-data.json /tmp/location-data.json
-
-      #     git fetch origin gh-pages
-      #     git switch gh-pages || git checkout -b gh-pages
-      #     git reset --hard origin/gh-pages
-      #     git branch --show-current 
-
-      #     rm -rf public
-      #     mkdir -p public/data
-      #     cp /tmp/location-data.json public/data/location-data.json
-      #     echo "Updated at $(date -u)" > public/last-updated.txt
-      #     touch public/.nojekyll
-
-      #     git config user.name github-actions[bot]
-      #     git config user.email github-actions[bot]@users.noreply.github.com
-      #     git add public/data/location-data.json
-      #     git commit -m "Update location data [bot]" || echo "No changes"
-      #     git push origin gh-pages || git push origin gh-pages --force
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: List public/data contents
         run: ls -al public/data
 

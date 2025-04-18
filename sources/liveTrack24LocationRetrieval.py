@@ -4,7 +4,17 @@ from bs4 import BeautifulSoup
 from datetime import datetime
 
 def isLive(soup):
-    return "User is not live" not in soup.get_text()
+    text = soup.get_text()
+
+    if "User is not live" in text:
+        return False
+
+    for img in soup.find_all("img"):
+        src = img.get("src", "")
+        if "live_now_small.gif" in src.lower():
+            return True
+
+    return False
 
 
 def launchLocation(soup):
