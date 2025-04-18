@@ -1,0 +1,35 @@
+{
+    "livetrack24": {
+      "isLive": true,
+      "launchLocation": "Mount Baldy - CA [ ~ 6.4 km]",
+      "launchTimeUtc": "2025-04-18T14:02:00Z",
+      "landTimeUtc": "2025-04-18T15:10:00Z",
+      "flightDurationTimeSpan": "01:08:00",
+      "altitudeInFeet": "8230.5",
+      "flightDistanceFromTakeoffInMiles": "12.4",
+      "coordinates": "34.2362,-117.6539",
+      "locationDataSource": "XCGuide v616"
+    },
+    "skylines": {
+      "isLive": false,
+      "launchLocation": "Lookout Ridge",
+      "launchTimeUtc": "2025-04-18T11:25:00Z",
+      "landTimeUtc": "2025-04-18T12:05:00Z",
+      "flightDurationTimeSpan": "00:40:00",
+      "altitudeInFeet": "5400.0",
+      "flightDistanceFromTakeoffInMiles": "5.6",
+      "coordinates": "36.4917,-118.7784",
+      "locationDataSource": "SkyLines"
+    },
+    "ogn": {
+      "isLive": true,
+      "launchLocation": "Saddleback Butte",
+      "launchTimeUtc": "2025-04-18T09:00:00Z",
+      "landTimeUtc": "2025-04-18T10:20:00Z",
+      "flightDurationTimeSpan": "01:20:00",
+      "altitudeInFeet": "7200.0",
+      "flightDistanceFromTakeoffInMiles": "10.0",
+      "coordinates": "34.6891,-117.8421",
+      "locationDataSource": "OGN Tracker"
+    }
+  }

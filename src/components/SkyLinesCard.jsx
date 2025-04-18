@@ -8,12 +8,13 @@ export default function SkyLinesCard() {
   const [distance, setDistance] = useState(null);
 
   useEffect(() => {
-    fetch("/data/skylines-location-data.json?ts=" + Date.now())
+    fetch("/data/location-data.json?ts=" + Date.now())
       .then((res) => res.json())
       .then((track) => {
-        setData(track);
-        if (track?.coordinates && navigator.geolocation) {
-          const [lat, lon] = track.coordinates.split(",").map(Number);
+        const lt24 = track?.skylines || {};
+        setData(lt24);
+        if (lt24?.coordinates && navigator.geolocation) {
+          const [lat, lon] = lt24.coordinates.split(",").map(Number);
           navigator.geolocation.getCurrentPosition((pos) => {
             const miles = haversineDistance(
               pos.coords.latitude,

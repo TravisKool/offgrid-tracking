@@ -46,12 +46,15 @@ def extractAltitudeInFeet():
     return None
 
 def extractClientProgram():
-    td_list = soup.find_all("td", class_="row1")
-    for td in td_list:
-        text = td.get_text(strip=True)
-        if text.startswith("Client Program:"):
+    for td in soup.find_all("td", class_="row1"):
+        if td.find(string=re.compile(r"Client Program")):
             b_tag = td.find("b")
-            return b_tag.get_text(strip=True) if b_tag else "Unknown"
+            if b_tag:
+                return b_tag.get_text(strip=True)
+            else:
+                print("[WARN] Found 'Client Program' label but no <b> tag.")
+                return "Unknown"
+    print("[WARN] Could not find 'Client Program' td.")
     return "Unknown"
 
 # Build structured output

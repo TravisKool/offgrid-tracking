@@ -6,13 +6,15 @@ export default function LiveTrackCard() {
   const [data, setData] = useState(null);
   const [distance, setDistance] = useState(null);
 
+
   useEffect(() => {
-    fetch("/data/livetrack24-location-data.json?ts=" + Date.now())
+    fetch("/data/location-data.json?ts=" + Date.now())
       .then((res) => res.json())
       .then((track) => {
-        setData(track);
-        if (track?.coordinates && navigator.geolocation) {
-          const [lat, lon] = track.coordinates.split(",").map(Number);
+        const lt24 = track?.livetrack24 || {};
+        setData(lt24);
+        if (lt24?.coordinates && navigator.geolocation) {
+          const [lat, lon] = lt24.coordinates.split(",").map(Number);
           navigator.geolocation.getCurrentPosition((pos) => {
             const miles = haversineDistance(
               pos.coords.latitude,

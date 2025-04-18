@@ -1,0 +1,183 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link href="/css/live_track.css" rel="stylesheet" type="text/css">
+
+<title>Live for Offgridcoder</title>
+</head>
+<body> 
+<div id='resultDiv'></div>
+<script language='javascript' src='https://www.livetrack24.com/js/jquery.js'></script>
+<script type="text/javascript">
+
+var currenttime = 'April 17, 2025 04:44:28'; //PHP method of getting server date
+var montharray=new Array("January","February","March","April","May","June","July","August","September","October","November","December");
+var serverdate=new Date(currenttime);
+
+function padlength(what){
+	var output=(what.toString().length==1)? "0"+what : what;
+	return output;
+}
+
+function displaytime(){
+	serverdate.setSeconds(serverdate.getSeconds()+1);
+	var datestring=montharray[serverdate.getMonth()]+" "+padlength(serverdate.getDate())+", "+serverdate.getFullYear();
+	var timestring=padlength(serverdate.getHours())+":"+padlength(serverdate.getMinutes())+":"+padlength(serverdate.getSeconds());
+	// document.getElementById("servertime").innerHTML=datestring+" "+timestring;
+	document.getElementById("servertime").innerHTML=timestring;
+}
+
+function moreInfo(username) {
+	$("#resultDiv").html("<img src='https://www.livetrack24.com/img/ajax-loader.gif'>");
+
+	$("#resultDiv").css({
+		left:$("#showMore").offset().left,
+		top:$("#showMore").offset().top+16 					
+	}).show();
+	
+	$.get( '/user/'+username+'/mobile',
+				function(result){ 						
+						$("#resultDiv").html( result); 
+						return;					
+				}
+			);	
+
+}
+</script> 
+ 
+<table width="396" cellspacing="0" cellpadding="0" > 
+   
+  <tr> 
+	<td width="396"  align=right >
+      <table width='390'  cellpadding='0' cellspacing='0' class='list_tracks'> 
+	          <tr class='$rowClass' > 
+          <td >            
+			<table width=100% cellpadding='0' cellspacing='0' class='last_info'>
+              <tr class="tableTop">
+                <td width="50%" ><div align='left'><h1 ><b>
+								<a href='/user/Offgridcoder/2d' title='' alt=''>
+		            Offgridcoder                </a>
+								</b></h1></div></td>
+                                <td width="50%"><div align="right"><strong>User is not live<BR>This is the latest info</strong></div></td>
+                              </tr>
+            </table></td> 
+        </tr> 
+		        <tr class='$rowClass'> 
+          <td  valign="top" ><table width="100%" cellpadding='0' cellspacing='0' class='last_info'> 
+              <tr> 
+                <td colspan="2" class="tablePosition"><div align="center"><strong>Last Position</strong></div></td> 
+              </tr>
+              <tr valign="top" class="row2"> 
+                <td width="114"><div align="right">Time:</div></td> 
+                <td width="220" ><b> 
+                  2025-04-08 07:11:10 GMT-7 
+                  </b></td> 
+              </tr> 
+              <tr valign="top" class="row1"> 
+                <td><div align="right">Height / Speed:</div></td> 
+                <td><strong> 
+                  363 m / 0 km/h</strong></td> 
+              </tr> 
+              <tr valign="top" class="row2"> 
+                <td> <div align="right">Takeoff Distance:</div></td> 
+                <td> <b> 
+                  2.5 
+                  km</b></td> 
+              </tr> 
+              <tr valign="top" class="row1"> 
+                <td><div align="right">Location:</div></td> 
+                <td><div align="left"><img src='https://www.livetrack24.com/img/flags/us.gif'>&nbsp;South Mountain&nbsp;-&nbsp;US [&nbsp;~&nbsp;12.2&nbsp;km]</div></td> 
+              </tr> 
+              <tr valign="top" class="row2"> 
+                <td><div align="right">Lat/Long:</div></td> 
+                <td>33.3711 / 
+                  -111.9391</td> 
+              </tr> 
+			                <tr valign="top" class="row1"> 
+                <td colspan="2"><div align="center">
+                    <a href='/user/Offgridcoder/ge'>Open in Google Earth (3D)</a>                  :
+                 <a href='/user/Offgridcoder/ge/2d/1'>Open in Google Earth (2D)</a>
+                  </div></td> 
+              </tr> 
+			            </table></td> 
+        </tr> 
+
+		        <tr>
+          <td valign="top" ><table width=100% cellpadding='0' cellspacing='0' class='last_info'>
+            <tr>
+              <td colspan="2" class="tableFlight"><div align="center"><strong>Flight
+                Info</strong></div></td>
+            </tr>
+            <tr valign="top" class="row2">
+              <td width="97"><div align="right">Start:</div></td>
+              <td   width="279"><b>
+                2025-04-08 17:02:02              </b></td>
+            </tr>
+            <tr valign="top" class="row1">
+              <td><div align="right">End:</div></td>
+              <td><strong>
+                2025-04-08 17:11:10              </strong></td>
+            </tr>
+            <tr valign="top" class="row2">
+              <td><div align="right">Duration:</div></td>
+              <td><strong>
+                00:09:08              </strong></td>
+            </tr>
+            <tr valign="top" class="row1">
+              <td>
+                <div align="right">Takeoff: </div></td>
+              <td> <b>
+                <img src='https://www.livetrack24.com/img/flags/us.gif'> South Mountain - US [ ~ 14.3 km]              </b></td>
+            </tr>
+            <tr valign="top" class="row2">
+              <td><div align="right">Max distance: </div></td>
+              <td><div align="left"><b>
+                  2.5        km</b> </div></td>
+            </tr>
+          </table></td>
+        </tr>
+        <tr> 
+          <td valign="top" > <table width='100%' align=right cellpadding='0' cellspacing='0' class='last_info' > 
+              <TR> 
+                <td class='detailsHeader'><div align="center">                      <strong>Connection Info</strong><br> 
+                  </div></td> 
+              </tr> 
+              <TR> 
+                <td class="row2"> Number of points: <b> 
+                  275 
+                  </b>, Tracking interval: <b> 
+                  2 
+                  secs</b></td> 
+              </tr> 
+              <TR> 
+                <td class="row1"> Packets sent: <b> 
+                  55 
+                  </b>, Packets Lost: <b> 
+                  0 
+                  </b> (
+                  0.00 
+                  %)</td> 
+              </tr> 
+              <TR> 
+                <td class="row2"> Phone: <b> 
+                  XCGuide 
+                  </b>, GPS: <b> 
+                  unknown 
+                  </b> </td> 
+              </tr> 
+              <TR> 
+                <td class="row1">Client Program: <b>XCGuide v616</b></td> 
+              </tr>              
+            </table></td> 
+        </tr> 
+		      </table> 
+     </td> 
+  </tr> 
+</table> 
+
+   
+
+</body>
+</html>
