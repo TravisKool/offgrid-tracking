@@ -45,6 +45,7 @@ jobs:
 
           git fetch origin gh-pages
           git worktree add gh-pages-worktree gh-pages
+          mkdir -p gh-pages-worktree/public/data
           cp public/data/location-data.json gh-pages-worktree/public/data/location-data.json
           cp public/last-updated.json gh-pages-worktree/public/last-updated.json
 
