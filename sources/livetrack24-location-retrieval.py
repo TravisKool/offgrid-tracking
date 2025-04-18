@@ -42,7 +42,7 @@ def extractAltitudeInFeet():
                 meters = float(match.group(1).replace(",", ""))
                 feet = round(meters * 3.28084, 1)
                 return feet
-    return None
+    return None
 
 def extractClientProgram():
     # Look for the td with text "Client Program:"
@@ -51,7 +51,7 @@ def extractClientProgram():
         b_tag = td.find("b")
         if b_tag:
             return b_tag.get_text(strip=True)
-    return None
+    return None
 
 # Build structured output
 output = {
