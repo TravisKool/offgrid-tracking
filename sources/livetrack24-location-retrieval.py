@@ -29,7 +29,8 @@ def extract_coordinates(text):
 
 def extract_distance_miles(text):
     match = re.search(r"([\d.]+)\s*km", text)
-    return round(float(match.group(1)) * 0.621371, 1) if match else 0.0
+    result = round(float(match.group(1)) * 0.621371, 1) if match else 0.0
+    return str(result)
 
 def extractAltitudeInFeet():
     # Locate the <td> containing "Height / Speed:"
@@ -41,17 +42,16 @@ def extractAltitudeInFeet():
             if match:
                 meters = float(match.group(1).replace(",", ""))
                 feet = round(meters * 3.28084, 1)
-                return feet
+                return str(feet)
     return None
 
 def extractClientProgram():
-    # Look for the td with text "Client Program:"
-    td = soup.find("td", class_="row1", string=re.compile(r"Client Program:"))
-    if td:
-        b_tag = td.find("b")
-        if b_tag:
-            return b_tag.get_text(strip=True)
-    return None
+    for td in soup.find_all("td", class_="row1"):
+        if "Client Program:" in td.text:
+            b_tag = td.find("b")
+            if b_tag:
+                return b_tag.get_text(strip=True)
+    return "Unknown"
 
 # Build structured output
 output = {
