@@ -11,11 +11,25 @@ def launchLocation(soup):
 
 def launchTimeUtc(soup):
     text = getBTextExactLabel(soup, "Start:")
-    return datetime.strptime(text, "%Y-%m-%d %H:%M:%S").isoformat() + "Z" if text else None
+    if not text:
+        return None
+    try:
+        return datetime.strptime(text, "%Y-%m-%d %H:%M:%S").isoformat() + "Z"
+    except ValueError:
+        if re.match(r"\d{2}:\d{2}:\d{2}", text):
+            return f"T{text}Z"
+    return None
 
 def landTimeUtc(soup):
     text = getBTextExactLabel(soup, "End:")
-    return datetime.strptime(text, "%Y-%m-%d %H:%M:%S").isoformat() + "Z" if text else None
+    if not text:
+        return None
+    try:
+        return datetime.strptime(text, "%Y-%m-%d %H:%M:%S").isoformat() + "Z"
+    except ValueError:
+        if re.match(r"\d{2}:\d{2}:\d{2}", text):
+            return f"T{text}Z"
+    return None
 
 def flightDurationTimeSpan(soup):
     return getBTextExactLabel(soup, "Duration:") or "Unknown"

@@ -12,7 +12,7 @@ def assertPopulated(field, value):
 def runIntegrationTest():
     print("=== Running LiveTrack24 Integration Test ===")
 
-    html_path = Path(__file__).parent / "lt24htmlraw.html"
+    html_path = Path(__file__).parent / "lt24htmlrawLive.html"
     if not html_path.exists():
         print("[ERROR] HTML file not found: lt24htmlraw.html")
         return
