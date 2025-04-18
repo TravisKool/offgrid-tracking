@@ -54,6 +54,10 @@ jobs:
           git add public/data/location-data.json
           git commit -m "Update location data [bot]" || echo "No changes"
           git push origin gh-pages || git push origin gh-pages --force
+
+      - name: List public/data contents
+        run: ls -al public/data
+
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
