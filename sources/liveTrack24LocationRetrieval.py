@@ -1,13 +1,21 @@
-from bs4 import BeautifulSoup
 import re
+import unicodedata
+from bs4 import BeautifulSoup
 from datetime import datetime
 
 def isLive(soup):
     return "User is not live" not in soup.get_text()
 
+
 def launchLocation(soup):
     td = soup.find("td", string=re.compile("Location:"))
-    return td.find_next_sibling("td").get_text(strip=True) if td else "Unknown"
+    if not td:
+        return "Unknown"
+    raw_text = td.find_next_sibling("td").get_text(strip=True)
+
+    cleaned = unicodedata.normalize("NFKD", raw_text).encode("ascii", "ignore").decode("ascii")
+    cleaned = re.sub(r"[^a-zA-Z0-9 ,.-]", "", cleaned)
+    return cleaned or "Unknown"
 
 def launchTimeUtc(soup):
     text = getBTextExactLabel(soup, "Start:")
