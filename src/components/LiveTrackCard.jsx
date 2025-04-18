@@ -32,6 +32,9 @@ import { haversineDistance, formatElapsedTimeFromNow, calculateDistanceFromUser 
       };
   
       fetchData();
+
+      const interval = setInterval(fetchData, 5000);
+      return () => clearInterval(interval);
     }, []);
   
 
