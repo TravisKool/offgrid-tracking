@@ -55,6 +55,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Curl live file from github Pages
-        sleep 10
+        sleep: 10
         run: |
           curl -s https://traviskool.github.io/offgrid-tracking/data/location-data.json
