@@ -47,7 +47,7 @@ def extractAltitudeInFeet():
 
 def extractClientProgram():
     for td in soup.find_all("td", class_="row1"):
-        if "Client Program:" in td.text:
+        if "Client Program:" in td.get_text():
             b_tag = td.find("b")
             if b_tag:
                 return b_tag.get_text(strip=True)
