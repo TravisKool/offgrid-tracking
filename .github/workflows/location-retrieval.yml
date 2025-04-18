@@ -40,8 +40,8 @@ jobs:
 
           git fetch origin gh-pages
           git switch gh-pages || git checkout -b gh-pages
-          git branch --show-current3
           git reset --hard origin/gh-pages
+          git branch --show-current 
 
           mkdir -p public/data
           cp /tmp/location-data.json public/data/location-data.json
