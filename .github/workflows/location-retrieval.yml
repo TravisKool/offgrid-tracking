@@ -43,9 +43,10 @@ jobs:
           git reset --hard origin/gh-pages
           git branch --show-current 
 
+          rm -rf public
           mkdir -p public/data
           cp /tmp/location-data.json public/data/location-data.json
-
+          echo "Updated at $(date -u)" > public/last-updated.txt
           touch public/.nojekyll
 
           git config user.name github-actions[bot]
