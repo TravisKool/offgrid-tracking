@@ -8,12 +8,14 @@ export default function LiveTrackCard() {
 
 
   useEffect(() => {
-    fetch("/data/location-data.json?ts=" + Date.now())
-      .then((res) => res.json())
-      .then((track) => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch(`/data/location-data.json?ts=${Date.now()}`);
+        const track = await res.json();
         const lt24 = track?.LiveTrack24 || {};
         setData(lt24);
-        if (lt24?.coordinates && navigator.geolocation) {
+  
+        if (lt24.coordinates && navigator.geolocation) {
           const [lat, lon] = lt24.coordinates.split(",").map(Number);
           navigator.geolocation.getCurrentPosition((pos) => {
             const miles = haversineDistance(
@@ -25,8 +27,12 @@ export default function LiveTrackCard() {
             setDistance(miles.toFixed(1));
           });
         }
-      })
-      .catch(console.error);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+  
+    fetchData();
   }, []);
 
   return (
