@@ -39,10 +39,11 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git pull origin main --rebase
           git add public/data/.
           git status
           git diff --cached --quiet || git commit -m "Update live tracking Locations"
+          git fetch origin
+          git pull --rebase --autostash || true
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
