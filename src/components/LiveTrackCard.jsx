@@ -88,7 +88,7 @@ import { haversineDistance, formatElapsedTimeFromNow, calculateDistanceFromUser 
         </a>
         {data?.coordinates && (
           <a
-            href={`https://www.google.com/maps/dir/?api=1&destination=\${data.coordinates}`}
+            href={`https://www.google.com/maps/dir/?api=1&destination=${data.coordinates}`}
             target="_blank"
             rel="noopener noreferrer"
             className="text-xs text-green-400 hover:underline block"
