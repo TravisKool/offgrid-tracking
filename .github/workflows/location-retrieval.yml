@@ -2,7 +2,7 @@ name: live-location-retrievals
 
 on:
   schedule:
-    - cron: "*/2 * * * *"
+    - cron: "*/1 * * * *"
   workflow_dispatch:
   workflow_run:
     workflows: ["Deploy to GitHub Pages"]
