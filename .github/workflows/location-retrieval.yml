@@ -15,8 +15,10 @@ jobs:
   update-live-location-data:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - name: Checkout gh-pages branch
         uses: actions/checkout@v3
+        with:
+          ref: gh-pages
 
       - name: Install Python Dependencies
         run: |
@@ -43,6 +45,7 @@ jobs:
           git config user.name github-actions[bot]
           git config user.email github-actions[bot]@users.noreply.github.com
           git add public/data/location-data.json public/last-updated.txt
+          git checkout -B gh-pages
           git commit -m "Update location data and trigger pages to rebuild [bot]" || echo "No changes"
           git push origin gh-pages || git push origin gh-pages --force
         env:
