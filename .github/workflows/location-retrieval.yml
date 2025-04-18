@@ -17,8 +17,6 @@ jobs:
     steps:
       - name: Checkout gh-pages branch
         uses: actions/checkout@v3
-        with:
-          ref: gh-pages
 
       - name: Install Python Dependencies
         run: |
@@ -44,8 +42,14 @@ jobs:
         run: |
           git config user.name github-actions[bot]
           git config user.email github-actions[bot]@users.noreply.github.com
+
+          git fetch origin gh-pages
+          git worktree add gh-pages-worktree gh-pages
+          cp public/data/location-data.json gh-pages-worktree/public/data/location-data.json
+          cp public/last-updated.json gh-pages-worktree/public/last-updated.json
+
+          cd gh-pages-worktree
           git add public/data/location-data.json public/last-updated.txt
-          git checkout -B gh-pages
           git commit -m "Update location data and trigger pages to rebuild [bot]" || echo "No changes"
           git push origin gh-pages || git push origin gh-pages --force
         env:
