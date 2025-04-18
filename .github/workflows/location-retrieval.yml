@@ -57,4 +57,4 @@ jobs:
       - name: Curl live file from github Pages
         run: |
           sleep 10
-          curl -s https://traviskool.github.io/offgrid-tracking/data/location-data.json
+          curl -sL https://traviskool.github.io/offgrid-tracking/data/location-data.json
