@@ -1,69 +1,40 @@
 import { useEffect, useState } from "react";
 import { cardStyle } from "../styles/sharedStyles.js";
-import { haversineDistance } from "../utils/geoUtils.js";
+import { haversineDistance, formatElapsedTimeFromNow, calculateDistanceFromUser } from "../utils/locationUtils.js";
 
-export default function LiveTrackCard() {
-  const [data, setData] = useState(null);
-  const [distance, setDistance] = useState(null);
-
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await fetch(`/data/location-data.json?ts=${Date.now()}`);
-        const track = await res.json();
-        const lt24 = track?.LiveTrack24 || {};
-        setData(lt24);
+  export default function LiveTrackCard() {
+    const [data, setData] = useState(null);
+    const [myCoordinates, setMyCoords] = useState(null);
   
-        if (lt24.coordinates && navigator.geolocation) {
-          const [lat, lon] = lt24.coordinates.split(",").map(Number);
-          navigator.geolocation.getCurrentPosition((pos) => {
-            const miles = haversineDistance(
-              pos.coords.latitude,
-              pos.coords.longitude,
-              lat,
-              lon
-            );
-            setDistance(miles.toFixed(1));
-          });
+    // Get user location once
+    useEffect(() => {
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          const { latitude, longitude } = pos.coords;
+          setMyCoords({ lat: latitude, lon: longitude });
+        },
+        (err) => {
+          console.error("Geolocation error:", err);
         }
-      } catch (err) {
-        console.error(err);
-      }
-    };
+      );
+    }, []);
   
-    fetchData();
-  }, []);
+    // Fetch tracker data once
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const res = await fetch(`/data/location-data.json?ts=${Date.now()}`);
+          const track = (await res.json()).LiveTrack24;
+          setData(track);
+        } catch (err) {
+          console.error("Error fetching tracking data:", err);
+        }
+      };
+  
+      fetchData();
+    }, []);
+  
 
-
-  const formatElapsedTimeFromNow = (isoUtcString) => {
-    if (!isoUtcString) return null;
-  
-    const now = new Date();
-    const then = new Date(isoUtcString);
-    let diff = Math.floor((now - then) / 1000); // in seconds
-  
-    if (diff < 0) return "in the future";
-  
-    const units = [
-      { label: "year", secs: 60 * 60 * 24 * 365 },
-      { label: "day", secs: 60 * 60 * 24 },
-      { label: "hour", secs: 60 * 60 },
-      { label: "minute", secs: 60 },
-    ];
-  
-    const result = [];
-  
-    for (const { label, secs } of units) {
-      const value = Math.floor(diff / secs);
-      if (value > 0) {
-        result.push(`${value} ${label}${value > 1 ? "s" : ""}`);
-        diff %= secs;
-      }
-    }
-  
-    return result.length > 0 ? `${result.join(", ")} ago` : "just now";
-  };
 
   return (
     <div className={cardStyle}>
@@ -89,16 +60,15 @@ export default function LiveTrackCard() {
             </div>
 
             <p><strong>Last Seen:</strong> {formatElapsedTimeFromNow(data.lastUpdatedDateTimeUtc)} </p>
+            <p><strong>Last Coordinates:</strong> {data.coordinates}</p>
+            <p><strong>Distance From You (Miles):</strong> {calculateDistanceFromUser(myCoordinates, data.coordinates)}</p>
+            <p><strong>Flight Duration:</strong> {data.flightDurationTimeSpan}</p>
             <p><strong>Launch:</strong> {data.launchLocation}</p>
             <p><strong>Launch Time (UTC):</strong> {data.launchTimeUtc}</p>
             <p><strong>Land Time (UTC):</strong> {data.landTimeUtc}</p>
             <p><strong>altitude (FT):</strong> {data.altitudeInFeet}</p>
-            <p><strong>Flight Duration:</strong> {data.flightDurationTimeSpan}</p>
             <p><strong>Distance from Takeoff:</strong> {data.flightDistanceFromTakeoffInMiles} miles</p>
             <p><strong>Data Source:</strong> {data.locationDataSource}</p>
-            {distance && (
-              <p><strong>Distance from you:</strong> {distance} miles</p>
-            )}
           </div>
         ) : (
           <p className="text-gray-400">Location unavailable</p>

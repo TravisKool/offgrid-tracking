@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { cardStyle } from "../styles/sharedStyles.js";
-import { haversineDistance } from "../utils/geoUtils.js";
+import { haversineDistance } from "../utils/locationUtils.js";
 
 
 export default function SkyLinesCard() {
