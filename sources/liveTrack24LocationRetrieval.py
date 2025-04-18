@@ -16,6 +16,21 @@ def isLive(soup):
 
     return False
 
+def lastUpdatedDateTimeUtc(soup):
+    last_pos_header = soup.find(string=re.compile(r"Last Position", re.IGNORECASE))
+    if not last_pos_header:
+        return None
+
+    time_label = last_pos_header.find_parent().find_next(string=re.compile(r"^\s*Time:\s*$"))
+    if not time_label:
+        return None
+
+    time_tag = time_label.find_next("b")
+    if not time_tag:
+        return None
+
+    return time_tag.get_text(strip=True)
+
 
 def launchLocation(soup):
     td = soup.find("td", string=re.compile("Location:"))
@@ -95,6 +110,7 @@ def getBTextExactLabel(soup, label):
 def buildLocationData(soup):
     return {
         "isLive": isLive(soup),
+        "lastUpdatedDateTimeUtc": lastUpdatedDateTimeUtc(soup),
         "launchLocation": launchLocation(soup),
         "launchTimeUtc": launchTimeUtc(soup),
         "landTimeUtc": landTimeUtc(soup),

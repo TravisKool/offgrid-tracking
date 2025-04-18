@@ -35,6 +35,36 @@ export default function LiveTrackCard() {
     fetchData();
   }, []);
 
+
+  const formatElapsedTimeFromNow = (isoUtcString) => {
+    if (!isoUtcString) return null;
+  
+    const now = new Date();
+    const then = new Date(isoUtcString);
+    let diff = Math.floor((now - then) / 1000); // in seconds
+  
+    if (diff < 0) return "in the future";
+  
+    const units = [
+      { label: "year", secs: 60 * 60 * 24 * 365 },
+      { label: "day", secs: 60 * 60 * 24 },
+      { label: "hour", secs: 60 * 60 },
+      { label: "minute", secs: 60 },
+    ];
+  
+    const result = [];
+  
+    for (const { label, secs } of units) {
+      const value = Math.floor(diff / secs);
+      if (value > 0) {
+        result.push(`${value} ${label}${value > 1 ? "s" : ""}`);
+        diff %= secs;
+      }
+    }
+  
+    return result.length > 0 ? `${result.join(", ")} ago` : "just now";
+  };
+
   return (
     <div className={cardStyle}>
       <h2 className="text-xl font-semibold mb-2 text-white">LiveTrack24</h2>
@@ -58,6 +88,7 @@ export default function LiveTrackCard() {
               </span>
             </div>
 
+            <p><strong>Last Seen:</strong> {formatElapsedTimeFromNow(data.lastUpdatedDateTimeUtc)} </p>
             <p><strong>Launch:</strong> {data.launchLocation}</p>
             <p><strong>Launch Time (UTC):</strong> {data.launchTimeUtc}</p>
             <p><strong>Land Time (UTC):</strong> {data.landTimeUtc}</p>
