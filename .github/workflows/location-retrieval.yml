@@ -42,7 +42,7 @@ jobs:
         run: |
           git config user.name github-actions[bot]
           git config user.email github-actions[bot]@users.noreply.github.com
-          git add public/data/location-data.json rebuild-trigger.txt
+          git add public/data/location-data.json last-updated.txt
           git commit -m "Update location data and trigger pages to rebuild [bot]" || echo "No changes"
           git push origin gh-pages || git push origin gh-pages --force
         env:
