@@ -38,16 +38,15 @@ jobs:
         run: |
           echo "Updated at $(date -u)" > public/last-updated.txt
 
-      - name: Create CNAME file
-        run: echo 'traviskool.live' > dist/CNAME
-        
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public
-          publish_branch: gh-pages
-          force_orphan: true
+      - name: Commit and push updated data to gh-pages
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email github-actions[bot]@users.noreply.github.com
+          git add public/data/location-data.json rebuild-trigger.txt
+          git commit -m "Update location data and trigger pages to rebuild [bot]" || echo "No changes"
+          git push origin gh-pages || git push origin gh-pages --force
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # - name: Commit and push updated data to gh-pages
       #   run: |
@@ -69,8 +68,8 @@ jobs:
       #     git add public/data/location-data.json
       #     git commit -m "Update location data [bot]" || echo "No changes"
       #     git push origin gh-pages || git push origin gh-pages --force
-        # env:
-          # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: List public/data contents
         run: ls -al public/data
