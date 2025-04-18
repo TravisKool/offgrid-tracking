@@ -34,14 +34,19 @@ jobs:
       - name: Show file contents
         run: cat public/data/location-data.json
 
-      - name: Commit and push updated data
+      - name: Commit and push updated data to gh-pages
         run: |
+          git fetch origin gh-pages
+          git switch gh-pages || git checkout -b gh-pages
+
+          mkdir -p public/data
+          cp public/data/location-data.json public/data/location-data.json
+
+          git add public/data/location-data.json
+
           git config user.name github-actions[bot]
           git config user.email github-actions[bot]@users.noreply.github.com
-          git switch gh-pages
-          git pull origin gh-pages
-          git add public/data/location-data.json
-          git commit -m "Update live tracking Locations" || echo "No changes to commit"
+          git commit -m "Update location data [bot]" || echo "No changes to commit"
           git push origin gh-pages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
