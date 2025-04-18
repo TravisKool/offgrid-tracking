@@ -41,6 +41,8 @@ import { haversineDistance, formatElapsedTimeFromNow, calculateDistanceFromUser 
 
   return (
     <div className={cardStyle}>
+
+      
       <h2 className="text-xl font-semibold mb-2 text-white">LiveTrack24</h2>
 
       {data ? (
