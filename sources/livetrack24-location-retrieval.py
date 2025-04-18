@@ -46,11 +46,12 @@ def extractAltitudeInFeet():
     return None
 
 def extractClientProgram():
-    for td in soup.find_all("td", class_="row1"):
-        if "Client Program:" in td.get_text():
+    td_list = soup.find_all("td", class_="row1")
+    for td in td_list:
+        text = td.get_text(strip=True)
+        if text.startswith("Client Program:"):
             b_tag = td.find("b")
-            if b_tag:
-                return b_tag.get_text(strip=True)
+            return b_tag.get_text(strip=True) if b_tag else "Unknown"
     return "Unknown"
 
 # Build structured output
