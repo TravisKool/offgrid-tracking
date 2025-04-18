@@ -32,8 +32,8 @@ jobs:
       - name: List public/data contents
         run: ls -al public/data
 
-      # - name: Show file contents
-      #   run: cat public/data/livetrack24-location-data.json
+      - name: Show file contents
+        run: cat public/data/livetrack24-location-data.json
 
       - name: Commit and push updated data
         run: |
