@@ -1,11 +1,11 @@
 {
   "isLive": false,
-  "launchLocation": "South Mountain\u00a0-\u00a0US [\u00a0~\u00a012.2\u00a0km]",
-  "launchTimeUtc": "2025-04-08T17:02:02Z",
-  "landTimeUtc": "2025-04-08T17:11:10Z",
-  "flightDurationTimeSpan": "00:09:08",
+  "launchLocation": "South Mountain\u00a0-\u00a0US [\u00a0~\u00a013.1\u00a0km]",
+  "launchTimeUtc": "2025-04-17T16:49:00Z",
+  "landTimeUtc": "2025-04-17T16:54:48Z",
+  "flightDurationTimeSpan": "00:05:48",
   "speedInMph": 0,
   "flightDistanceFromTakeoffInMiles": 0.0,
-  "coordinates": "33.3711,-111.9391",
+  "coordinates": "33.3722,-111.9289",
   "locationDataSource": "Unknown"
 }
