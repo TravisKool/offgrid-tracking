@@ -31,6 +31,28 @@ def extract_distance_miles(text):
     match = re.search(r"([\d.]+)\s*km", text)
     return round(float(match.group(1)) * 0.621371, 1) if match else 0.0
 
+def extractAltitudeInFeet():
+    # Locate the <td> containing "Height / Speed:"
+    label_td = soup.find("td", string=re.compile(r"Height\s*/\s*Speed:"))
+    if label_td:
+        value_td = label_td.find_next_sibling("td")
+        if value_td:
+            match = re.search(r"([\d,.]+)\s*m", value_td.get_text())
+            if match:
+                meters = float(match.group(1).replace(",", ""))
+                feet = round(meters * 3.28084, 1)
+                return feet
+    return None
+
+def extractClientProgram():
+    # Look for the td with text "Client Program:"
+    td = soup.find("td", class_="row1", string=re.compile(r"Client Program:"))
+    if td:
+        b_tag = td.find("b")
+        if b_tag:
+            return b_tag.get_text(strip=True)
+    return None
+
 # Build structured output
 output = {
     "isLive": "User is not live" not in soup.get_text(),
@@ -38,10 +60,10 @@ output = {
     "launchTimeUtc": datetime.strptime(extract_text_after("Start:"), "%Y-%m-%d %H:%M:%S").isoformat() + "Z" if extract_text_after("Start:") else None,
     "landTimeUtc": datetime.strptime(extract_text_after("End:"), "%Y-%m-%d %H:%M:%S").isoformat() + "Z" if extract_text_after("End:") else None,
     "flightDurationTimeSpan": extract_text_after("Duration:") or "Unknown",
-    "speedInMph": 0,
+    "altitudeInFeet": extractAltitudeInFeet(),
     "flightDistanceFromTakeoffInMiles": extract_distance_miles(extract_text_after("Takeoff Distance:") or ""),
     "coordinates": extract_coordinates(extract_text_after("Lat/Long:") or "") or "0.0,0.0",
-    "locationDataSource": extract_text_after("Client Program:") or "Unknown"
+    "locationDataSource": extractClientProgram()
 }
 
 # Save to JSON

@@ -53,6 +53,7 @@ export default function LiveTrackCard() {
             <p><strong>Launch:</strong> {data.launchLocation}</p>
             <p><strong>Launch Time (UTC):</strong> {data.launchTimeUtc}</p>
             <p><strong>Land Time (UTC):</strong> {data.landTimeUtc}</p>
+            <p><strong>altitude (FT):</strong> {data.altitudeInFeet}</p>
             <p><strong>Flight Duration:</strong> {data.flightDurationTimeSpan}</p>
             <p><strong>Distance from Takeoff:</strong> {data.flightDistanceFromTakeoffInMiles} miles</p>
             <p><strong>Data Source:</strong> {data.locationDataSource}</p>

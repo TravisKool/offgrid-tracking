@@ -4,7 +4,7 @@
   "launchTimeUtc": "2025-04-17T16:49:00Z",
   "landTimeUtc": "2025-04-17T16:54:48Z",
   "flightDurationTimeSpan": "00:05:48",
-  "speedInMph": 0,
+  "altitudeInFeet": 0,
   "flightDistanceFromTakeoffInMiles": 0.0,
   "coordinates": "33.3722,-111.9289",
   "locationDataSource": "Unknown"
