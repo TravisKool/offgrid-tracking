@@ -77,6 +77,9 @@ def altitudeInFeet(soup):
             return str(round(meters * 3.28084, 1))
     return None
 
+def speedInMph(soup):
+    return 0
+
 def flightDistanceFromTakeoffInMiles(soup):
     text = getBTextExactLabel(soup, "Takeoff Distance:")
     match = re.search(r"([\d.]+)\s*km", text or "")
@@ -116,7 +119,9 @@ def buildLocationData(soup):
         "landTimeUtc": landTimeUtc(soup),
         "flightDurationTimeSpan": flightDurationTimeSpan(soup),
         "altitudeInFeet": altitudeInFeet(soup),
+        "speedInMph": speedInMph(soup),
         "flightDistanceFromTakeoffInMiles": flightDistanceFromTakeoffInMiles(soup),
         "coordinates": coordinates(soup),
-        "locationDataSource": locationDataSource(soup)
+        "locationDataSource": locationDataSource(soup),
+        "sourceWebsiteUrl": "https://www.livetrack24.com/user/Offgridcoder/text"
     }

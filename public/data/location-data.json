@@ -7,6 +7,7 @@
     "landTimeUtc": "2025-04-17T16:54:48Z",
     "flightDurationTimeSpan": "00:05:48",
     "altitudeInFeet": "1181.1",
+    "speedInMph": "55",
     "flightDistanceFromTakeoffInMiles": "1.3",
     "coordinates": "33.3722,-111.9289",
     "locationDataSource": "XCGuide v616"
