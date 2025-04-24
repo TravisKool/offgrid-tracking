@@ -1,7 +1,8 @@
 import React from "react";
-import LiveTrackCard from "./components/LiveTrackCard.jsx";
-import SkyLinesCard from "./components/SkyLinesCard.jsx";
 import { cardStyle } from "./styles/sharedStyles.js";
+import LiveTrackCardShell from "./components/LiveTrackCardShell.jsx";
+import LiveTrack24CardDetails from "./components/LiveTrack24CardDetails.jsx";
+import GarminInReachCardDetails from "./components/GarminInReachCardDetails.jsx";
 
 const trackers = [
   { name: "Skylines", url: "https://skylines.aero/tracking/13962" },
@@ -22,8 +23,21 @@ export default function App() {
         <div className="text-3xl font-bold mb-8">Track Travis</div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-6xl">
 
-          <LiveTrackCard source="Garmin InReach" />
-          <LiveTrackCard source="Live Track 24" />
+          <LiveTrackCardShell
+            sourceKey="LiveTrack24"
+          >
+            {({ data, myCoordinates }) => (
+              <LiveTrack24CardDetails data={data} myCoordinates={myCoordinates} />
+            )}
+          </LiveTrackCardShell>
+
+          <LiveTrackCardShell
+            sourceKey="Garmin InReach"
+          >
+            {({ data, myCoordinates }) => (
+              <GarminInReachCardDetails data={data} myCoordinates={myCoordinates} />
+            )}
+          </LiveTrackCardShell>
 
           {trackers.map((tracker, index) => (
             <a

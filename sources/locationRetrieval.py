@@ -15,9 +15,10 @@ response = requests.get(url, headers={"Cache-Control": "no-cache"})
 soup = BeautifulSoup(response.text, "html.parser")
 result["Live Track 24"] = buildLt24Data(soup)
 
-url = "https://share.garmin.com/Share/TravisKool.kml"
+url = "https://share.garmin.com/Share/TravisKool"
 with urllib.request.urlopen(url) as response:
-    tree = ET.parse(response)
+    xml_content = response.read().decode("utf-8")
+tree = ET.ElementTree(ET.fromstring(xml_content))
 root = tree.getroot()
 ns = {'kml': 'http://www.opengis.net/kml/2.2'}
 placemark = root.find(".//kml:Placemark", ns)

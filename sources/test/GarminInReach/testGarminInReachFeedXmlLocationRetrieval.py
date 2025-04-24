@@ -1,6 +1,6 @@
 import json
 from pathlib import Path
-from sources.liveTrack24LocationRetrieval import buildLocationData
+from sources.garminInReachLocationRetrieval import buildLocationData
 import urllib.request
 import xml.etree.ElementTree as ET
 
@@ -13,13 +13,13 @@ def assertPopulated(field, value):
 def runIntegrationTest():
     print("=== Running GarminInReach XML Parser Integration Test ===")
 
-url = "https://share.garmin.com/Share/TravisKool.kml"
-with urllib.request.urlopen(url) as response:
-    tree = ET.parse(response)
-root = tree.getroot()
-ns = {'kml': 'http://www.opengis.net/kml/2.2'}
-placemark = root.find(".//kml:Placemark", ns)
-result = buildInReachData(placemark)
+    # Load from local file instead of URL
+    xml_path = Path("sources/test/GarminInReach/GarminInReachXmlFeed.xml")
+    tree = ET.parse(xml_path)
+    root = tree.getroot()
+    ns = {"kml": "http://www.opengis.net/kml/2.2"}
+    placemark = root.find(".//kml:Placemark", ns)
+    result = buildLocationData(placemark)
 
     print("\nParsed Output:")
     print(json.dumps(result, indent=2))

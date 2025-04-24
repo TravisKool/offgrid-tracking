@@ -90,7 +90,7 @@
             <value>334.00 m from MSL</value>
           </Data>
           <Data name="Velocity">
-            <value>0.0 km/h</value>
+            <value>25.0 km/h</value>
           </Data>
           <Data name="Course">
             <value>22.50 ° True</value>
