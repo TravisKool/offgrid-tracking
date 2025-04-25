@@ -15,7 +15,7 @@ response = requests.get(url, headers={"Cache-Control": "no-cache"})
 soup = BeautifulSoup(response.text, "html.parser")
 result["Live Track 24"] = buildLt24Data(soup)
 
-url = "https://share.garmin.com/Share/TravisKool"
+url = "https://share.garmin.com/feed/Share/TravisKool"
 with urllib.request.urlopen(url) as response:
     raw = response.read().decode("utf-8", errors="ignore")
 xml_content = re.sub(r"[^\x09\x0A\x0D\x20-\uD7FF\uE000-\uFFFD]+", "", raw)
