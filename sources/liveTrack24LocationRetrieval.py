@@ -2,6 +2,11 @@ import re
 import unicodedata
 from bs4 import BeautifulSoup
 from datetime import datetime
+import requests
+
+def sourceWebsiteUrl():
+    url = "https://www.livetrack24.com/user/Offgridcoder/text"
+    return url
 
 def isLive(soup):
     text = soup.get_text()
@@ -110,7 +115,10 @@ def getBTextExactLabel(soup, label):
                 return b.get_text(strip=True) if b else sibling.get_text(strip=True)
     return None
 
-def buildLocationData(soup):
+def buildLocationData():
+    url = sourceWebsiteUrl()
+    response = requests.get(url, headers={"Cache-Control": "no-cache"})
+    soup = BeautifulSoup(response.text, "html.parser")
     return {
         "isLive": isLive(soup),
         "lastUpdatedDateTimeUtc": lastUpdatedDateTimeUtc(soup),
@@ -123,5 +131,5 @@ def buildLocationData(soup):
         "flightDistanceFromTakeoffInMiles": flightDistanceFromTakeoffInMiles(soup),
         "coordinates": coordinates(soup),
         "locationDataSource": locationDataSource(soup),
-        "sourceWebsiteUrl": "https://www.livetrack24.com/user/Offgridcoder/text"
+        "sourceWebsiteUrl": sourceWebsiteUrl()
     }
