@@ -80,7 +80,7 @@ def buildLocationData(placemark):
         "isLive": isLive(placemark),
         "coordinates": parseCoordinates(placemark),
         "speedInMph": parseSpeedInMilesPerHour(placemark),
-        "directionInDegrees": parseDirectionInDegrees(placemark),
+        "directionInDegrees": extractDirectionInDegrees(placemark),
         "altitudeInFeet": parseElevationInFeetMsl(placemark),
         "lastMessageReceived": parseLastMessageReceived(placemark),
         "lastMessageReceivedDateTimeInPst": parseLastMessageReceivedDateTimeInPst(placemark),
