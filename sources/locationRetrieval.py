@@ -1,8 +1,8 @@
 import json
+import re
 import requests
 import urllib.request
 import xml.etree.ElementTree as ET
-import json
 from bs4 import BeautifulSoup
 from pathlib import Path
 from sources.liveTrack24LocationRetrieval import buildLocationData as buildLt24Data
@@ -17,7 +17,8 @@ result["Live Track 24"] = buildLt24Data(soup)
 
 url = "https://share.garmin.com/Share/TravisKool"
 with urllib.request.urlopen(url) as response:
-    xml_content = response.read().decode("utf-8")
+    raw = response.read().decode("utf-8", errors="ignore")
+xml_content = re.sub(r"[^\x09\x0A\x0D\x20-\uD7FF\uE000-\uFFFD]+", "", raw)
 tree = ET.ElementTree(ET.fromstring(xml_content))
 root = tree.getroot()
 ns = {'kml': 'http://www.opengis.net/kml/2.2'}
