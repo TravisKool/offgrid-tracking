@@ -18,9 +18,9 @@
     "coordinates": "33.370981,-111.938581",
     "speedInMph": 0.0,
     "directionInDegrees": "0.00 \u00b0 True",
-    "altitudeInFeet": 1145.14,
+    "altitudeInFeet": 1165.62,
     "lastMessageReceived": "Garmin received location (Automated)",
-    "lastMessageReceivedDateTimeUtc": "2025-04-25T01:07:00Z",
+    "lastMessageReceivedDateTimeUtc": "2025-04-25T02:06:45Z",
     "locationDataSource": "Garmin InReach Mini 2",
     "sourceWebsiteUrl": "https://share.garmin.com/TravisKool"
   }
