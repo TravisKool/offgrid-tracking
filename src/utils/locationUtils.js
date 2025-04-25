@@ -40,7 +40,7 @@ export const formatElapsedTimeFromNow = (isoUtcString) => {
   for (const { label, secs } of units) {
     const value = Math.floor(diff / secs);
     if (value > 0) {
-      result.push(${value} ${label}${value > 1 ? "s" : ""});
+      result.push(`${value} ${label}${value > 1 ? "s" : ""}`);
       diff %= secs;
     }
   }
