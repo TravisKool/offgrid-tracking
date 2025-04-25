@@ -60,7 +60,7 @@ def parseElevationInFeetMsl(placemark):
     return 0.0
 
 def parseLastMessageReceived(placemark):
-    return extractTextFromExtendedData(placemark, "Text") or ""
+    return extractTextFromExtendedData(placemark, "Text") or "Garmin received location (Automated)"
 
 from datetime import datetime, timezone
 
