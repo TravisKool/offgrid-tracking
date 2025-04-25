@@ -21,12 +21,15 @@ def isLive(soup):
 
     return False
 
+import re
+from datetime import datetime, timedelta, timezone
+
 def lastUpdatedDateTimeUtc(soup):
-    last_pos_header = soup.find(string=re.compile(r"Last Position", re.IGNORECASE))
+    last_pos_header = soup.find(string=re.compile("Last Position", re.IGNORECASE))
     if not last_pos_header:
         return None
 
-    time_label = last_pos_header.find_parent().find_next(string=re.compile(r"^\s*Time:\s*$"))
+    time_label = last_pos_header.find_parent().find_next(string=re.compile(r"^Time:\s*"))
     if not time_label:
         return None
 
@@ -34,7 +37,20 @@ def lastUpdatedDateTimeUtc(soup):
     if not time_tag:
         return None
 
-    return time_tag.get_text(strip=True)
+    raw_time = time_tag.get_text(strip=True)  # e.g., "2025-04-18 12:00:54 GMT-7"
+    match = re.match(r"(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}) GMT([+-]\d+)", raw_time)
+    if not match:
+        return None
+
+    time_str, offset_str = match.groups()
+    try:
+        local_dt = datetime.strptime(time_str, "%Y-%m-%d %H:%M:%S")
+        offset = int(offset_str)
+        local_dt = local_dt.replace(tzinfo=timezone(timedelta(hours=offset)))
+        utc_dt = local_dt.astimezone(timezone.utc)
+        return utc_dt.isoformat().replace("+00:00", "Z")
+    except Exception:
+        return None
 
 
 def launchLocation(soup):

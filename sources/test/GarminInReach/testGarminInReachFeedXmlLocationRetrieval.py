@@ -13,13 +13,7 @@ def assertPopulated(field, value):
 def runIntegrationTest():
     print("=== Running GarminInReach XML Parser Integration Test ===")
 
-    # Load from local file instead of URL
-    xml_path = Path("sources/test/GarminInReach/GarminInReachXmlFeed.xml")
-    tree = ET.parse(xml_path)
-    root = tree.getroot()
-    ns = {"kml": "http://www.opengis.net/kml/2.2"}
-    placemark = root.find(".//kml:Placemark", ns)
-    result = buildLocationData(placemark)
+    result = buildLocationData()
 
     print("\nParsed Output:")
     print(json.dumps(result, indent=2))

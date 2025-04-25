@@ -21,12 +21,12 @@ export const calculateDistanceFromUser = (myCoordinates, targetCoordinates) => {
 };
 
 export const formatElapsedTimeFromNow = (isoUtcString) => {
-  if (!isoUtcString) return null;
+  if (!isoUtcString) return "";
 
-  const now = new Date();
-  const then = new Date(isoUtcString);
+  const now = new Date().getTime(); // already in UTC
+  const then = new Date(isoUtcString).getTime(); // also UTC if string has Z or is ISO 8601
+
   let diff = Math.floor((now - then) / 1000); // in seconds
-
   if (diff < 0) return "in the future";
 
   const units = [
@@ -37,14 +37,13 @@ export const formatElapsedTimeFromNow = (isoUtcString) => {
   ];
 
   const result = [];
-
   for (const { label, secs } of units) {
     const value = Math.floor(diff / secs);
     if (value > 0) {
-      result.push(`${value} ${label}${value > 1 ? "s" : ""}`);
+      result.push(${value} ${label}${value > 1 ? "s" : ""});
       diff %= secs;
     }
   }
 
-  return result.length > 0 ? `${result.join(", ")} ago` : "just now";
+  return result.length ? result[0] + " ago" : "just now";
 };

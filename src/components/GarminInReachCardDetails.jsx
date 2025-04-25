@@ -4,8 +4,8 @@ export default function GarminInReachCardDetails({ data, myCoordinates }) {
     return (
         <>
             <div className="text-sm text-white space-y-1">
+                <p><strong>Last Seen:</strong> {formatElapsedTimeFromNow(data.lastMessageReceivedDateTimeUtc)}</p>
                 <p><strong>Last Message Received:</strong> {data.lastMessageReceived}</p>
-                <p><strong>Last Message DateTime PST:</strong> {data.lastMessageReceivedDateTimeInPst}</p>
                 <p><strong>Last Coordinates:</strong> {data.coordinates}</p>
                 <p><strong>Speed in MPH:</strong> {data.speedInMph}</p>
                 <p><strong>Distance From You (Miles):</strong> {calculateDistanceFromUser(myCoordinates, data.coordinates)}</p>

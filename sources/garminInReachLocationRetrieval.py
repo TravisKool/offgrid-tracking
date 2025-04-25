@@ -62,17 +62,17 @@ def parseElevationInFeetMsl(placemark):
 def parseLastMessageReceived(placemark):
     return extractTextFromExtendedData(placemark, "Text") or ""
 
-def parseLastMessageReceivedDateTimeInPst(placemark):
+from datetime import datetime, timezone
+
+def parseLastMessageReceivedDateTimeUtc(placemark):
     raw = extractTextFromExtendedData(placemark, "Time UTC")
     if raw:
         try:
             dt = datetime.strptime(raw, "%m/%d/%Y %I:%M:%S %p")
-            pst = dt - timedelta(hours=7)
-            return pst.isoformat() + "-07:00"
+            return dt.replace(tzinfo=timezone.utc).isoformat().replace("+00:00", "Z")
         except ValueError:
             return None
     return None
-
 
 def locationDataSource():
     return "Garmin InReach Mini 2"
@@ -94,7 +94,7 @@ def buildLocationData():
         "directionInDegrees": extractDirectionInDegrees(placemark),
         "altitudeInFeet": parseElevationInFeetMsl(placemark),
         "lastMessageReceived": parseLastMessageReceived(placemark),
-        "lastMessageReceivedDateTimeInPst": parseLastMessageReceivedDateTimeInPst(placemark),
+        "lastMessageReceivedDateTimeUtc": parseLastMessageReceivedDateTimeUtc(placemark),
         "locationDataSource": locationDataSource(),
         "sourceWebsiteUrl": sourceWebsiteUrl()
     }
