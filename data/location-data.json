@@ -14,13 +14,13 @@
     "sourceWebsiteUrl": "https://www.livetrack24.com/user/Offgridcoder/text"
   },
   "Garmin InReach": {
-    "isLive": false,
-    "coordinates": "33.370981,-111.938581",
+    "isLive": true,
+    "coordinates": "34.702891,-112.116100",
     "speedInMph": 0.0,
     "directionInDegrees": "0.00 \u00b0 True",
-    "altitudeInFeet": 1165.62,
+    "altitudeInFeet": 7899.61,
     "lastMessageReceived": "Garmin received location (Automated)",
-    "lastMessageReceivedDateTimeUtc": "2025-04-25T02:06:45Z",
+    "lastMessageReceivedDateTimeUtc": "2025-05-10T17:15:30Z",
     "locationDataSource": "Garmin InReach Mini 2",
     "sourceWebsiteUrl": "https://share.garmin.com/TravisKool"
   }
