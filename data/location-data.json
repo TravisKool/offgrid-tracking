@@ -14,7 +14,7 @@
     "sourceWebsiteUrl": "https://www.livetrack24.com/user/Offgridcoder/text"
   },
   "Garmin InReach": {
-    "isLive": true,
+    "isLive": false,
     "coordinates": "34.702828,-112.116121",
     "speedInMph": 0.0,
     "directionInDegrees": "0.00 \u00b0 True",
