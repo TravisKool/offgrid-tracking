@@ -3,6 +3,17 @@ import { formatElapsedTimeFromNow, calculateDistanceFromUser } from "../utils/lo
 export default function LiveTrack24CardDetails({ data, myCoordinates }) {
   return (
     <>
+      <div className="flex items-center space-x-2 mb-2">
+        <div
+          className={`w-3 h-3 rounded-full ${data.isLive ? "bg-green-400 animate-pulse" : "bg-red-500 opacity-60"
+            }`}
+          title={data.isLive ? "Flying" : "Landed or Offline"}
+        />
+        <span className={`font-semibold text-sm ${data.isLive ? "text-green-300" : "text-red-400"}`}>
+          {data.isLive ? "Flying" : "Landed or Offline"}
+        </span>
+      </div>
+
       <div className="text-sm text-white space-y-1">
         <p><strong>Last Seen:</strong> {formatElapsedTimeFromNow(data.lastUpdatedDateTimeUtc)}</p>
         <p><strong>Last Coordinates:</strong> {data.coordinates}</p>

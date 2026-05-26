@@ -20,6 +20,10 @@ def isLive(placemark):
             return False
     return False
 
+def isFlyingOrHiking(placemark):
+    speed = parseSpeedInMilesPerHour(placemark)
+    return speed > 0
+
 def extractTextFromExtendedData(placemark, name):
     dataFields = placemark.findall(".//{http://www.opengis.net/kml/2.2}Data")
     for field in dataFields:
@@ -88,7 +92,7 @@ def buildLocationData():
     placemark = root.find(".//kml:Placemark", ns)
 
     return {
-        "isLive": isLive(placemark),
+        "isLive": isFlyingOrHiking(placemark),
         "coordinates": parseCoordinates(placemark),
         "speedInMph": parseSpeedInMilesPerHour(placemark),
         "directionInDegrees": extractDirectionInDegrees(placemark),

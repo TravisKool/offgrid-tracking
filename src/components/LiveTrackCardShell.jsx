@@ -18,7 +18,13 @@ export default function LiveTrackCardShell({ sourceKey, children }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch(`/data/location-data.json?ts=${Date.now()}`);
+        // Construct fetch URL using BASE_URL so it works with Vite's base path.
+        // BASE_URL is "/offgrid-tracking/" in production or "/" in dev root.
+        const base = import.meta.env.BASE_URL;
+        const fetchUrl = `${base}data/location-data.json?ts=${Date.now()}`;
+        console.debug("BASE_URL:", base, "Fetching:", fetchUrl);
+        const res = await fetch(fetchUrl);
+        if (!res.ok) throw new Error(`HTTP ${res.status}: ${res.statusText}`);
         const json = await res.json();
         setData(json[sourceKey]);
       } catch (err) {
@@ -38,16 +44,7 @@ export default function LiveTrackCardShell({ sourceKey, children }) {
       {data ? (
         data.coordinates ? (
           <>
-            <div className="flex items-center space-x-2 mb-2">
-              <div
-                className={`w-3 h-3 rounded-full ${data.isLive ? "bg-green-400 animate-pulse" : "bg-red-500 opacity-60"
-                  }`}
-                title={data.isLive ? "Live" : "Offline"}
-              />
-              <span className={`font-semibold text-sm ${data.isLive ? "text-green-300" : "text-red-400"}`}>
-                {data.isLive ? "Live" : "Offline"}
-              </span>
-            </div>
+            
 
             {children({ data, myCoordinates })}
 
