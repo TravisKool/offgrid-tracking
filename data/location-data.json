@@ -15,12 +15,12 @@
   },
   "Garmin InReach": {
     "isLive": true,
-    "coordinates": "42.248546,-123.025911",
-    "speedInMph": 2.49,
-    "directionInDegrees": "90.00 \u00b0 True",
-    "altitudeInFeet": 1695.05,
-    "lastMessageReceived": "Travis Kool: LOK - landed here after a great flight, all good! Retrieve please. 1-831-359-3812, https://flyxc.app . More tracking: https://bit.ly/locate-travis",
-    "lastMessageReceivedDateTimeUtc": "2026-05-30T20:57:43Z",
+    "coordinates": "42.248493,-123.024023",
+    "speedInMph": 3.11,
+    "directionInDegrees": "112.50 \u00b0 True",
+    "altitudeInFeet": 1688.12,
+    "lastMessageReceived": "Garmin received location (Automated)",
+    "lastMessageReceivedDateTimeUtc": "2026-05-30T21:24:15Z",
     "locationDataSource": "Garmin InReach Mini 2",
     "sourceWebsiteUrl": "https://share.garmin.com/TravisKool"
   }
