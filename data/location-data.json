@@ -15,12 +15,12 @@
   },
   "Garmin InReach": {
     "isLive": false,
-    "coordinates": "47.250030,-119.845498",
+    "coordinates": "47.804271,-120.038853",
     "speedInMph": 0.0,
     "directionInDegrees": "0.00 \u00b0 True",
-    "altitudeInFeet": 1329.76,
-    "lastMessageReceived": "#3916 PUP Travis Kool 18313593812 has a ride",
-    "lastMessageReceivedDateTimeUtc": "2026-06-22T23:11:33Z",
+    "altitudeInFeet": 3703.97,
+    "lastMessageReceived": "Garmin received location (Automated)",
+    "lastMessageReceivedDateTimeUtc": "2026-06-23T16:38:30Z",
     "locationDataSource": "Garmin InReach Mini 2",
     "sourceWebsiteUrl": "https://share.garmin.com/TravisKool"
   }
