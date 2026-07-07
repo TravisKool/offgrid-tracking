@@ -14,13 +14,13 @@
     "sourceWebsiteUrl": "https://www.livetrack24.com/user/Offgridcoder/text"
   },
   "Garmin InReach": {
-    "isLive": false,
-    "coordinates": "51.242970,-116.922490",
-    "speedInMph": 0.0,
-    "directionInDegrees": "0.00 \u00b0 True",
-    "altitudeInFeet": 2573.72,
-    "lastMessageReceived": "LOK, NR. #12, Travis Kool, 18313593812 , Landed Safe and has a ride.",
-    "lastMessageReceivedDateTimeUtc": "2026-07-06T23:20:01Z",
+    "isLive": true,
+    "coordinates": "51.275586,-116.885261",
+    "speedInMph": 1.24,
+    "directionInDegrees": "270.00 \u00b0 True",
+    "altitudeInFeet": 6392.29,
+    "lastMessageReceived": "Garmin received location (Automated)",
+    "lastMessageReceivedDateTimeUtc": "2026-07-07T16:03:45Z",
     "locationDataSource": "Garmin InReach Mini 2",
     "sourceWebsiteUrl": "https://share.garmin.com/TravisKool"
   }
