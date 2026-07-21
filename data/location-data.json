@@ -15,12 +15,12 @@
   },
   "Garmin InReach": {
     "isLive": false,
-    "coordinates": "51.039401,-114.091686",
+    "coordinates": "51.242015,-116.922683",
     "speedInMph": 0.0,
     "directionInDegrees": "0.00 \u00b0 True",
-    "altitudeInFeet": 3562.66,
+    "altitudeInFeet": 2616.6,
     "lastMessageReceived": "Garmin received location (Automated)",
-    "lastMessageReceivedDateTimeUtc": "2026-07-18T00:09:30Z",
+    "lastMessageReceivedDateTimeUtc": "2026-07-21T17:15:30Z",
     "locationDataSource": "Garmin InReach Mini 2",
     "sourceWebsiteUrl": "https://share.garmin.com/TravisKool"
   }
