@@ -14,13 +14,13 @@
     "sourceWebsiteUrl": "https://www.livetrack24.com/user/Offgridcoder/text"
   },
   "Garmin InReach": {
-    "isLive": true,
-    "coordinates": "51.275618,-116.885111",
-    "speedInMph": 1.86,
-    "directionInDegrees": "112.50 \u00b0 True",
-    "altitudeInFeet": 6409.12,
-    "lastMessageReceived": "Flying from here soon! 18313593812",
-    "lastMessageReceivedDateTimeUtc": "2026-07-26T18:15:06Z",
+    "isLive": false,
+    "coordinates": "51.237820,-116.914980",
+    "speedInMph": 0.0,
+    "directionInDegrees": "0.00 \u00b0 True",
+    "altitudeInFeet": 2616.6,
+    "lastMessageReceived": "LOK landed safely! 18313593812",
+    "lastMessageReceivedDateTimeUtc": "2026-07-26T19:50:02Z",
     "locationDataSource": "Garmin InReach Mini 2",
     "sourceWebsiteUrl": "https://share.garmin.com/TravisKool"
   }
