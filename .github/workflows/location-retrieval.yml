@@ -1,13 +1,14 @@
 name: live-location-retrievals
 
 on:
-  schedule:
-    - cron: "*/1 * * * *"
   workflow_dispatch:
-  workflow_run:
-    workflows: ["Deploy to GitHub Pages"]
-    types:
-      - completed
+  # Automatic triggers disabled. Was:
+  # schedule:
+  #   - cron: "*/1 * * * *"
+  # workflow_run:
+  #   workflows: ["Deploy to GitHub Pages"]
+  #   types:
+  #     - completed
 permissions:
   contents: write
 
