@@ -15,12 +15,12 @@
   },
   "Garmin InReach": {
     "isLive": false,
-    "coordinates": "37.388738,-118.316401",
+    "coordinates": "36.472881,-118.114936",
     "speedInMph": 0.0,
     "directionInDegrees": "0.00 \u00b0 True",
-    "altitudeInFeet": 4170.93,
-    "lastMessageReceived": "LOK landed safely! Travis Kool - 18313593812",
-    "lastMessageReceivedDateTimeUtc": "2026-09-10T20:18:12Z",
+    "altitudeInFeet": 9135.33,
+    "lastMessageReceived": "Garmin received location (Automated)",
+    "lastMessageReceivedDateTimeUtc": "2026-09-11T16:56:00Z",
     "locationDataSource": "Garmin InReach Mini 2",
     "sourceWebsiteUrl": "https://share.garmin.com/TravisKool"
   }
