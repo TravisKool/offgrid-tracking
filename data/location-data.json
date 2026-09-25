@@ -14,13 +14,13 @@
     "sourceWebsiteUrl": "https://www.livetrack24.com/user/Offgridcoder/text"
   },
   "Garmin InReach": {
-    "isLive": true,
-    "coordinates": "39.496600,-111.871183",
-    "speedInMph": 1.86,
-    "directionInDegrees": "337.50 \u00b0 True",
-    "altitudeInFeet": 5437.96,
-    "lastMessageReceived": "#100 LOK Travis Kool 1-831-359-3812 https://puretrack.io/#travis-kool",
-    "lastMessageReceivedDateTimeUtc": "2026-09-24T23:15:06Z",
+    "isLive": false,
+    "coordinates": "39.496621,-111.871118",
+    "speedInMph": 0.0,
+    "directionInDegrees": "0.00 \u00b0 True",
+    "altitudeInFeet": 5349.61,
+    "lastMessageReceived": "#100 PUP Travis Kool 1-831-359-3812 https://puretrack.io/#travis-kool",
+    "lastMessageReceivedDateTimeUtc": "2026-09-24T23:31:41Z",
     "locationDataSource": "Garmin InReach Mini 2",
     "sourceWebsiteUrl": "https://share.garmin.com/TravisKool"
   }
