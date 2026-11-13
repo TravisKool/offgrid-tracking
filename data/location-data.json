@@ -15,12 +15,12 @@
   },
   "Garmin InReach": {
     "isLive": true,
-    "coordinates": "19.892806,-103.654290",
-    "speedInMph": 17.96,
-    "directionInDegrees": "157.50 \u00b0 True",
-    "altitudeInFeet": 8784.38,
-    "lastMessageReceived": "Garmin received location (Automated)",
-    "lastMessageReceivedDateTimeUtc": "2026-11-13T17:43:00Z",
+    "coordinates": "19.914758,-103.597813",
+    "speedInMph": 1.24,
+    "directionInDegrees": "202.50 \u00b0 True",
+    "altitudeInFeet": 4285.33,
+    "lastMessageReceived": "#1717 LOK Travis Kool 1-831-359-3812 https://puretrack.io/#travis-kool",
+    "lastMessageReceivedDateTimeUtc": "2026-11-13T20:24:06Z",
     "locationDataSource": "Garmin InReach Mini 2",
     "sourceWebsiteUrl": "https://share.garmin.com/TravisKool"
   }
